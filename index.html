@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTE SOLAR - Painéis Solares</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header e Navegação */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FFFFFF, #FFFFFF);
+            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2);
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a3a5f;
+            line-height: 1.1;
+        }
+
+        .logo-subtext {
+            color: #2c5282;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #2c5282;
+        }
+
+        .nav-links a.active {
+            color: #2c5282;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #FFD700;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 20px;
+        }
+
+        .header-icons a {
+            color: #4a5568;
+            transition: color 0.3s;
+        }
+
+        .header-icons a:hover {
+            color: #2c5282;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(rgba(26, 58, 95, 0.85), rgba(44, 82, 130, 0.85)), 
+                        url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+        }
+
+        .hero-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #FFD700;
+            color: #1a3a5f;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid #FFD700;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: #FFD700;
+        }
+
+        /* Filtro por capacidade */
+        .capacity-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .capacity-btn {
+            padding: 12px 25px;
+            background-color: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #4a5568;
+        }
+
+        .capacity-btn:hover, .capacity-btn.active {
+            background-color: #2c5282;
+            color: white;
+            border-color: #2c5282;
+        }
+
+        /* Produtos */
+        .products-section {
+            padding: 20px 0 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #1a3a5f;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #FFD700;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #FFD700;
+            color: #1a3a5f;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-capacity {
+            color: #2c5282;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1a3a5f;
+        }
+
+        .product-description {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a3a5f;
+        }
+
+        .price span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #718096;
+        }
+
+        .add-to-cart {
+            background-color: #2c5282;
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 18px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #1a3a5f;
+        }
+
+        /* Destaques */
+        .highlights {
+            background-color: #f0f4f8;
+            padding: 80px 0;
+            margin-bottom: 80px;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .highlight-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .highlight-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-icon img {
+            width: 60%;
+            height: 60%;
+            object-fit: contain;
+        }
+
+        .highlight-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1a3a5f;
+        }
+
+        .highlight-text {
+            color: #718096;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a3a5f;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #FFD700;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #FFD700;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #2d3748;
+            color: #cbd5e0;
+            font-size: 14px;
+        }
+
+        .footer-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .newsletter-form button {
+            background-color: #FFD700;
+            color: #1a3a5f;
+            border: none;
+            padding: 0 20px;
+            font-weight: 700;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .capacity-filter {
+                gap: 10px;
+            }
+
+            .capacity-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .hero-logo {
+                width: 90px;
+                height: 90px;
+            }
+        }
+
+        /* Estilos para os produtos filtrados */
+        .product-card.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <a href="#" class="logo">
+                    <div class="logo-image">
+                        <!-- Logo da ARTE SOLAR -->
+                        <img src="Image/solar.jpg">
+                    </div>
+                    <div class="logo-text-container">
+                        <div class="logo-text">ARTE SOLAR</div>
+                        <div class="logo-subtext">Energia para o futuro</div>
+                    </div>
+                </a>
+
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#" class="active">Home</a></li>
+                        <li><a href="#produtos">Produtos</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-logo">
+                <!-- Logo grande no hero -->
+                <img src="Image/solar.jpg">
+            </div>
+            <h1>Energia solar com estilo</h1>
+            <p>Descubra nossa coleção exclusiva de painéis solares de alta eficiência. Tecnologia avançada combinada com design elegante para sua casa ou empresa.</p>
+            <a href="#produtos" class="btn">Ver Coleção</a>
+        </div>
+    </section>
+
+    <!-- Filtro por capacidade -->
+    <div class="container">
+        <div class="capacity-filter">
+            <button class="capacity-btn active" data-capacity="all">Todos</button>
+            <button class="capacity-btn" data-capacity="500">500 W</button>
+            <button class="capacity-btn" data-capacity="800">800 W</button>
+            <button class="capacity-btn" data-capacity="1000">1000 W</button>
+            <button class="capacity-btn" data-capacity="1500">1500 W</button>
+        </div>
+    </div>
+
+    <!-- Produtos -->
+    <section class="products-section" id="produtos">
+        <div class="container">
+            <h2 class="section-title">Nossa Coleção</h2>
+            
+            <div class="products-grid">
+                <!-- Produto 500W -->
+                <div class="product-card" data-capacity="500">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542332213-9b5a5a3f9854?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Painel Solar 500W">
+                        <div class="product-badge">Mais Vendido</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-capacity">500 W</span>
+                        <h3 class="product-name">Painel Solar Monocristalino</h3>
+                        <p class="product-description">Alta eficiência em espaços compactos. Ideal para residências com telhado limitado.</p>
+                        <div class="product-price">
+                            <div class="price">R$ 1.299<span> /unidade</span></div>
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 500W -->
+                <div class="product-card" data-capacity="500">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Painel Solar 500W">
+                        <div class="product-badge">Econômico</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-capacity">500 W</span>
+                        <h3 class="product-name">Painel Solar Policristalino</h3>
+                        <p class="product-description">Excelente custo-benefício para quem está começando na energia solar.</p>
+                        <div class="product-price">
+                            <div class="price">R$ 999<span> /unidade</span></div>
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 800W -->
+                <div class="product-card" data-capacity="800">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Painel Solar 800W">
+                        <div class="product-badge">Novidade</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-capacity">800 W</span>
+                        <h3 class="product-name">Painel Solar Bifacial</h3>
+                        <p class="product-description">Capta energia de ambos os lados, aumentando a produção em até 30%.</p>
+                        <div class="product-price">
+                            <div class="price">R$ 2.199<span> /unidade</span></div>
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 800W -->
+                <div class="product-card" data-capacity="800">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542332213-31f5f0a8d31e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Painel Solar 800W">
+                        <div class="product-badge">Eficiência A+</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-capacity">800 W</span>
+                        <h3 class="product-name">Painel Solar de Alta Performance</h3>
+                        <p class="product-description">Tecnologia de ponta com células de última geração para máxima eficiência.</p>
+                        <div class="product-price">
+                            <div class="price">R$ 2.450<span> /unidade</span></div>
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 1000W -->
+                <div class="product-card" data-capacity="1000">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Painel Solar 1000W">
+                        <div class="product-badge">Premium</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-capacity">1000 W</span>
+                        <h3 class="product-name">Painel Solar Black Edition</h3>
+                        <p class="product-description">Design elegante em preto total com tecnologia de absorção máxima de luz.</p>
+                        <div class="product-price">
+                            <div class="price">R$ 3.299<span> /unidade</span></div>
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 1000W -->
+                <div class="product-card" data-capacity="1000">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1521618755570-bd923a4dca6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Painel Solar 1000W">
+                        <div class="product-badge">Resistente</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-capacity">1000 W</span>
+                        <h3 class="product-name">Painel Solar Industrial</h3>
+                        <p class="product-description">Construção reforçada para condições climáticas extremas. Garantia de 25 anos.</p>
+                        <div class="product-price">
+                            <div class="price">R$ 3.599<span> /unidade</span></div>
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 1500W -->
+                <div class="product-card" data-capacity="1500">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542336391-ae2936d8c838?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Painel Solar 1500W">
+                        <div class="product-badge">Exclusivo</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-capacity">1500 W</span>
+                        <h3 class="product-name">Painel Solar MaxPower</h3>
+                        <p class="product-description">Máxima potência em um único painel. Ideal para grandes projetos comerciais.</p>
+                        <div class="product-price">
+                            <div class="price">R$ 4.899<span> /unidade</span></div>
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 1500W -->
+                <div class="product-card" data-capacity="1500">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Painel Solar 1500W">
+                        <div class="product-badge">Tecnologia Avançada</div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-capacity">1500 W</span>
+                        <h3 class="product-name">Painel Solar Futura</h3>
+                        <p class="product-description">Tecnologia de ponta com micro-inversores integrados para máxima eficiência.</p>
+                        <div class="product-price">
+                            <div class="price">R$ 5.250<span> /unidade</span></div>
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destaques -->
+    <section class="highlights" id="sobre">
+        <div class="container">
+            <h2 class="section-title">Por que escolher a ARTE SOLAR?</h2>
+            
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <div class="highlight-icon">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDVDMTEuNzIgNSA1IDExLjcyIDUgMjBDNSAyOC4yOCAxMS43MiAzNSAyMCAzNUMyOC4yOCAzNSAzNSAyOC4yOCAzNSAyMEMzNSAxMS43MiAyOC4yOCA1IDIwIDVaIiBmaWxsPSIjRkZENzAwIi8+CjxwYXRoIGQ9Ik0yMi41IDEyLjVMMTcuNSAyMEwyMi41IDI3LjVMMjcuNSAyMEwyMi41IDEyLjVaIiBmaWxsPSIjMUEzQTVGIi8+Cjwvc3ZnPgo=" alt="Alta Eficiência">
+                    </div>
+                    <h3 class="highlight-title">Alta Eficiência</h3>
+                    <p class="highlight-text">Painéis com as mais avançadas tecnologias do mercado, garantindo máximo aproveitamento da luz solar.</p>
+                </div>
+
+                <div class="highlight-item">
+                    <div class="highlight-icon">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDVMMzAgMTVMMzUgMTBMMzAgMTVMMzUgMjBMMzAgMjVMMzUgMzBMMzAgMjVMMjAgMzVMMTAgMjVMNSAzMEwxMCAyNUw1IDIwTDEwIDE1TDUgMTBMMTAgMTVMMjAgNVoiIGZpbGw9IiNGRkQ3MDAiLz4KPC9zdmc+Cg==" alt="Garantia">
+                    </div>
+                    <h3 class="highlight-title">Garantia Extendida</h3>
+                    <p class="highlight-text">Oferecemos garantia de 25 anos para todos os nossos produtos, a mais longa do mercado.</p>
+                </div>
+
+                <div class="highlight-item">
+                    <div class="highlight-icon">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUgMTVIMzVWMzVINVYxNVoiIGZpbGw9IiNGRkQ3MDAiLz4KPHBhdGggZD0iTTEwIDVMMzAgMTBMMzAgMTVMMTAgMTBMMTAgNVoiIGZpbGw9IiMxQTNBNUYiLz4KPC9zdmc+Cg==" alt="Entrega">
+                    </div>
+                    <h3 class="highlight-title">Entrega Rápida</h3>
+                    <p class="highlight-text">Entregamos em todo o Brasil em até 10 dias úteis. Para capitais, entrega em até 5 dias.</p>
+                </div>
+
+                <div class="highlight-item">
+                    <div class="highlight-icon">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDE1QzE3LjI0IDE1IDE1IDE3LjI0IDE1IDIwQzE1IDIyLjc2IDE3LjI0IDI1IDIwIDI1QzIyLjc2IDI1IDI1IDIyLjc2IDI1IDIwQzI1IDE3LjI0IDIyLjc2IDE1IDIwIDE1WiIgZmlsbD0iI0ZGRDcwMCIvPgo8cGF0aCBkPSJNMjUgMTVMMzUgMjBMMjUgMjVMMjUgMTVaIiBmaWxsPSIjMUEzQTVGIi8+Cjwvc3ZnPgo=" alt="Suporte">
+                    </div>
+                    <h3 class="highlight-title">Suporte Especializado</h3>
+                    <p class="highlight-text">Nossa equipe técnica está pronta para ajudar na instalação e tirar todas as suas dúvidas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="Image/solar.jpg">
+                    </div>
+                    <h3>ARTE SOLAR</h3>
+                    <p>Transformando a luz do sol em energia para sua vida. Oferecemos as melhores soluções em energia solar com design, qualidade e tecnologia.</p>
+                    <div style="margin-top: 20px; display: flex; gap: 15px; font-size: 20px;">
+                        <a href="#" style="color: #FFD700;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: #FFD700;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #FFD700;"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" style="color: #FFD700;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 ARTE SOLAR. Todos os direitos reservados.</p>
+                <p style="margin-top: 10px;">Av. Valdomiro Lopes, 1234 - Conquista, Rio Branco - AC | Tel: (68) 99971-9900</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filtro por capacidade
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.capacity-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove a classe active de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Adiciona a classe active ao botão clicado
+                    this.classList.add('active');
+                    
+                    const selectedCapacity = this.getAttribute('data-capacity');
+                    
+                    // Mostra/oculta produtos conforme a capacidade selecionada
+                    productCards.forEach(card => {
+                        const cardCapacity = card.getAttribute('data-capacity');
+                        
+                        if (selectedCapacity === 'all' || selectedCapacity === cardCapacity) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            
+            // Simulação de adição ao carrinho
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-name').textContent;
+                    const productCapacity = productCard.querySelector('.product-capacity').textContent;
+                    
+                    // Animação do botão
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    this.style.backgroundColor = '#10B981';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-shopping-cart"></i>';
+                        this.style.backgroundColor = '';
+                    }, 1500);
+                    
+                    // Mensagem de confirmação
+                    alert(`${productName} (${productCapacity}) foi adicionado ao carrinho!`);
+                });
+            });
+            
+            // Newsletter form
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = this.querySelector('input[type="email"]');
+                    
+                    if (emailInput.value) {
+                        alert('Obrigado por se inscrever em nossa newsletter! Em breve você receberá nossas novidades.');
+                        emailInput.value = '';
+                    }
+                });
+            }
+            
+            // Navegação suave para âncoras
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
